@@ -9,14 +9,70 @@ from discord import Role
 from discord import Server
 import discord
 
-BOT_PREFIX = "."
+BOT_PREFIX = ("Dobby ", "dobby")
 TOKEN = os.environ['TOKEN']
 
 client = Bot(command_prefix=BOT_PREFIX)
 
+@client.command(name='8ball',
+                description="Answers a yes/no question.",
+                brief="Answers from the beyond.",
+                aliases=['eight_ball', 'eightball', '8-ball'],
+                pass_context=True)
+async def eight_ball(context):
+    possible_responses = [
+        'That is a resounding no',
+        'It is not looking likely',
+        'Too hard to tell',
+        'It is quite possible',
+        'Definitely',
+    ]
+    await client.say(random.choice(possible_responses) + ", " + context.message.author.mention)
+
+@client.command(name='spell',
+                description="Provides a random Harry Potter Spell.",
+                brief="Spellbook.",
+                aliases=['spells', 'spellbook', 'charm', 'curse'],
+                pass_context=True)
+async def spell(context):
+    url = "https://www.potterapi.com/v1/spells?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq"
+    response = requests.get(url)
+    value = random.choice(response.json())
+    msg = "A good " + value["type"].lower() + " might be... " + value["spell"] + ". It " + value["effect"] + "."
+    await client.send_message(context.message.channel, msg)
+
+
+@client.command(name='sorting',
+                description="Picks a random house to display.",
+                brief="Choose a random house.",
+                aliases=['sort', 'bestHouse'],
+                pass_context=True)
+async def bestHouse(context):
+    url = "https://www.potterapi.com/v1/sortinghat"
+    response = requests.get(url)
+    value = response.json()
+    msg = "" + value + " is best Dobby thinks."
+    await client.send_message(context.message.channel, msg)
+
+
+@client.command(name='trivia',
+                description="Begins Harry Potter Trivia",
+                brief="HP Trivia.",
+                aliases=['HP-Trivia'],
+                pass_context=True)
+async def trivia(context):
+	msg = "Time for Harry Potter Trivia. Dobby loves Trivia..."
+	await client.send_message(context.message.channel, msg)
+	triviaStart()
+
+
+async def trivaStart():
+
+
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
+    await client.process_commands(message)
     if message.author == client.user:
     	return
 
@@ -52,7 +108,7 @@ async def on_message(message):
     	url = "https://www.potterapi.com/v1/spells?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq"
     	response = requests.get(url)
     	value = random.choice(response.json())
-    	msg = "A good " + value["type"] + " might be... " + value["spell"] + ". It " + value["effect"] + "."
+    	msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     	await client.send_message(message.channel, msg)
 
     if message.content.lower().startswith('dobby what house is best?'):
@@ -62,15 +118,15 @@ async def on_message(message):
     	msg = "" + value + " is best Dobby thinks."
     	await client.send_message(message.channel, msg)
 
-    if message.content.lower().startswith('dobby tell me about someone'):
-    	url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
-    	response = requests.get(url)
-    	value = random.choice(response.json())
-    	msg = "How about " + value["name"] + " a " + value["role"] + " from " + value["school"] + ". " + value["name"] + " is also a " + value["species"] + " " + value["bloodStatus"]
-    	await client.send_message(message.channel, msg)
+    # if message.content.lower().startswith('dobby tell me about someone'):
+    # 	url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
+    # 	response = requests.get(url)
+    # 	value = random.choice(response.json())
+    # 	msg = "How about " + value["name"] + " a " + value["role"] + " from " + value["school"] + ". " + value["name"] + " is also a " + value["species"] + " " + value["bloodStatus"]
+    # 	await client.send_message(message.channel, msg)
 
 #More Random Stuff
-    if message.content.lower().startswith('gives dobby a sock'):
+    if message.content.lower().startswith('_gives dobby a sock_'):
     	msg = 'THANK YOU, {0.author.mention}! DOBBY IS FREE ELF!'.format(message)
     	await client.send_message(message.channel, msg)
 
