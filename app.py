@@ -9,40 +9,54 @@ from discord import Role
 from discord import Server
 import discord
 
-BOT_PREFIX = ("Dobby ", "dobby")
+BOT_PREFIX = "."
 TOKEN = os.environ['TOKEN']
 
 client = Bot(command_prefix=BOT_PREFIX)
 
-@client.command(name='8ball',
-                description="Answers a yes/no question.",
-                brief="Answers from the beyond.",
-                aliases=['eight_ball', 'eightball', '8-ball'],
-                pass_context=True)
-async def eight_ball(context):
-    possible_responses = [
-        'That is a resounding no',
-        'It is not looking likely',
-        'Too hard to tell',
-        'It is quite possible',
-        'Definitely',
-    ]
-    await client.say(random.choice(possible_responses) + ", " + context.message.author.mention)
+# @client.command(name='8ball',
+#                 description="Answers a yes/no question.",
+#                 brief="Answers from the beyond.",
+#                 aliases=['eight_ball', 'eightball', '8-ball'],
+#                 pass_context=True)
+# async def eight_ball(context):
+#     possible_responses = [
+#         'That is a resounding no',
+#         'It is not looking likely',
+#         'Too hard to tell',
+#         'It is quite possible',
+#         'Definitely',
+#     ]
+#     await client.say(random.choice(possible_responses) + ", " + context.message.author.mention)
 
-@client.command(name='spell',
+@client.group(pass_context=True)
+async def dobby(ctx):
+    if ctx.invoked_subcommand is None:
+    	availablegifs = [
+    		"dobbydie.gif",
+    		"dobbyfree.gif",
+    		"dobbyheadhit.gif",
+    		"dobbyhitself.gif",
+    		"dobbymagic.gif",
+    		"dobbysmug.gif",
+    		"dobbytwitch.gif"
+    	]
+    	await client.send_file(ctx.message.channel, random.choice(availablegifs))
+
+@dobby.command(name='Random Spell',
                 description="Provides a random Harry Potter Spell.",
                 brief="Spellbook.",
-                aliases=['spells', 'spellbook', 'charm', 'curse'],
+                aliases=['spells', 'spellbook', 'charm', 'curse', "spell"],
                 pass_context=True)
 async def spell(context):
     url = "https://www.potterapi.com/v1/spells?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq"
     response = requests.get(url)
     value = random.choice(response.json())
-    msg = "A good " + value["type"].lower() + " might be... " + value["spell"] + ". It " + value["effect"] + "."
+    msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     await client.send_message(context.message.channel, msg)
 
 
-@client.command(name='sorting',
+@dobby.command(name='sorting',
                 description="Picks a random house to display.",
                 brief="Choose a random house.",
                 aliases=['sort', 'bestHouse'],
@@ -54,19 +68,39 @@ async def bestHouse(context):
     msg = "" + value + " is best Dobby thinks."
     await client.send_message(context.message.channel, msg)
 
+@dobby.command(name="Dobby Help",
+			   description="Gives a list of available commands.",
+			   brief="Dobby Help.",
+			   aliases=['help', 'halp'],
+			   pass_context=True)
+async def dobbyhelp(context):
+		msg = '''```Dobby Commands:
+		.dobby spell            - Provides a random Harry Potter Spell
+		.dobby sort             - Picks a random house to display.
+		.dobby character (name) - Finds a character by that name from HP.
+		```'''
+		await client.send_message(context.message.channel, msg)
 
-@client.command(name='trivia',
-                description="Begins Harry Potter Trivia",
-                brief="HP Trivia.",
-                aliases=['HP-Trivia'],
-                pass_context=True)
-async def trivia(context):
-	msg = "Time for Harry Potter Trivia. Dobby loves Trivia..."
-	await client.send_message(context.message.channel, msg)
-	triviaStart()
+@dobby.command(name="Character finder",
+			   description="",
+
+	)
+async def character(context, name):
+		pass
+
+	
 
 
-async def trivaStart():
+# @dobby.command(name='trivia',
+#                 description="Begins Harry Potter Trivia",
+#                 brief="HP Trivia.",
+#                 aliases=['HP-Trivia, trivia'],
+#                 pass_context=True)
+# async def trivia(context):
+# 	msg = "Time for Harry Potter Trivia. Dobby loves Trivia..."
+# 	await client.send_message(context.message.channel, msg)
+# 	value = random.choice(possible_questions)
+# 	await client.send_message(context.message.channel, msg)
 
 
 @client.event
