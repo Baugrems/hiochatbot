@@ -112,7 +112,7 @@ async def roll20(context):
         19: "images/D20_19.png",
         20: "images/D20_20.png"
     }
-    img = switcher.get(random.randomint(1,20), False)
+    img = switcher.get(random.randint(1,20), False)
     await client.send_file(message.channel, img)
 
 
