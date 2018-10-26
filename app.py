@@ -193,8 +193,8 @@ async def on_message(message):
     elif 'sock' in message.content.lower():
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
-    elif 'wingardium leviosa' in message.content.lower():
-        await client.send_file(message.channel, "levisosa.jpg")
+    elif 'leviosa' in message.content.lower():
+        await client.send_file(message.channel, "Leviosa.jpg")
     elif 'pokemon' in message.content.lower():
         await client.send_file(message.channel, "pokemon.jpeg")
 
