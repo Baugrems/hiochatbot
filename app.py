@@ -8,9 +8,12 @@ from discord import Channel
 from discord import Role
 from discord import Server
 import discord
+import boto
 
 BOT_PREFIX = "."
-TOKEN = os.environ['TOKEN']
+from boto.s3.connection import S3Connection
+s3 = S3Connection(os.environ['TOKEN'])
+TOKEN = s3
 
 client = Bot(command_prefix=BOT_PREFIX)
 
