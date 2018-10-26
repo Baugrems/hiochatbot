@@ -91,29 +91,30 @@ async def dobbyhelp(context):
                aliases=["d20", "D20", "roll20"],
                pass_context=True)
 async def roll20(context):
-    switcher = {
-        1: "images/D20_1.png",
-        2: "images/D20_2.png",
-        3: "images/D20_3.png",
-        4: "images/D20_4.png",
-        5: "images/D20_5.png",
-        6: "images/D20_6.png",
-        7: "images/D20_7.png",
-        8: "images/D20_8.png",
-        9: "images/D20_9.png",
-        10: "images/D20_10.png",
-        11: "images/D20_11.png",
-        12: "images/D20_12.png",
-        13: "images/D20_13.png",
-        14: "images/D20_14.png",
-        15: "images/D20_15.png",
-        16: "images/D20_16.png",
-        17: "images/D20_17.png",
-        18: "images/D20_18.png",
-        19: "images/D20_19.png",
-        20: "images/D20_20.png"
-    }
-    img = switcher.get(random.randint(1,20), False)
+    # switcher = {
+    #     1: "images/D20_1.png",
+    #     2: "images/D20_2.png",
+    #     3: "images/D20_3.png",
+    #     4: "images/D20_4.png",
+    #     5: "images/D20_5.png",
+    #     6: "images/D20_6.png",
+    #     7: "images/D20_7.png",
+    #     8: "images/D20_8.png",
+    #     9: "images/D20_9.png",
+    #     10: "images/D20_10.png",
+    #     11: "images/D20_11.png",
+    #     12: "images/D20_12.png",
+    #     13: "images/D20_13.png",
+    #     14: "images/D20_14.png",
+    #     15: "images/D20_15.png",
+    #     16: "images/D20_16.png",
+    #     17: "images/D20_17.png",
+    #     18: "images/D20_18.png",
+    #     19: "images/D20_19.png",
+    #     20: "images/D20_20.png"
+    # }
+    # img = switcher.get(random.randint(1,20), False)
+    img = "images/D20_" + random.randint(1,20) + ".png"
     await client.send_file(context.message.channel, img)
 
 
