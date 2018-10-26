@@ -74,19 +74,53 @@ async def bestHouse(context):
 			   aliases=['help', 'halp'],
 			   pass_context=True)
 async def dobbyhelp(context):
-		msg = '''```Dobby Commands:
+	msg = '''```Dobby Commands:
 		.dobby spell            - Provides a random Harry Potter Spell
 		.dobby sort             - Picks a random house to display.
-		.dobby character (name) - Finds a character by that name from HP.
-		```'''
-		await client.send_message(context.message.channel, msg)
+		.dobby character "name" - Finds a character by that name from HP.
+
+		Contact Sebastián Cazarez <@Baugrems1234> for Technical Support.```'''
+	await client.send_message(context.message.channel, msg)
 
 @dobby.command(name="Character finder",
-			   description="",
-
-	)
-async def character(context, name):
-		pass
+			   description="Finds Harry Potter Characters by name",
+			   brief="Finds characters",
+			   aliases=["character", "find", "search"],
+			   pass_context=True)
+async def character(context, findName):
+	payload = {'name': findName, 'key': '$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'}
+	response = requests.get('https://www.potterapi.com/v1/characters', params=payload)
+	# url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
+	# response = requests.get(url)
+	value = response.json()
+	if not value:
+		msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
+		await client.send_message(context.message.channel, msg)
+		await client.send_file(context.message.channel, "dobbyhitself.gif")
+	else:
+		value = value[0]
+		msg = value["name"] + " "
+		if value.get('role', False):
+			msg += ":: " + value["role"] + " "
+		if value.get("school", False):
+			msg = msg + ":: " + value["school"] + " "
+		if value.get('house', False):
+			msg = msg + ":: " + value["house"] + " house "
+		if value.get("deathEater", False):
+			msg = msg + ":: Death Eater "
+		if value.get("dumbledoresArmy", False):
+			msg = msg + ":: Member of Dumbledores Army "
+		if value.get("orderOfThePhoenix", False):
+			msg = msg + ":: Member of the Order of the Phoenix "
+		if value.get("ministryOfMagic", False):
+			msg = msg + ":: Member of the Ministry of Magic "
+		if value.get("species", False):
+			msg += "::Species - " + value["species"] + " "
+		if value.get("bloodStatus", False):
+			msg += ":: Blood-Status - " + value["bloodStatus"]
+		print(response.url)
+	# msg = "" + value["name"] + " is a " + value["role"] + " from " + value["school"] + ". " + value["name"] + " is also a " + value["species"] + " " + value["bloodStatus"]
+		await client.send_message(context.message.channel, msg)
 
 	
 
@@ -160,9 +194,12 @@ async def on_message(message):
     # 	await client.send_message(message.channel, msg)
 
 #More Random Stuff
-    if message.content.lower().startswith('_gives dobby a sock_'):
-    	msg = 'THANK YOU, {0.author.mention}! DOBBY IS FREE ELF!'.format(message)
+    if 'dobby a sock' in message.content.lower():
+    	await client.send_file(message.channel, "dobbysock.gif")
+    elif 'sock' in message.content.lower():
+    	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
+
 
 
 @client.event
