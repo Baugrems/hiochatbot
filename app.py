@@ -87,7 +87,7 @@ async def dobbyhelp(context):
 @dobby.command(name="D20 Roller",
                description="Roll a D20 and get an image back with results.",
                brief="Roll a D20.",
-               aliases="d20", "D20", "roll20",
+               aliases=["d20", "D20", "roll20"],
                pass_context=True)
 async def roll20(context):
     switcher = {
