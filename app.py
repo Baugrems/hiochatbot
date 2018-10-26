@@ -113,7 +113,7 @@ async def roll20(context):
         20: "images/D20_20.png"
     }
     img = switcher.get(random.randint(1,20), False)
-    await client.send_file(message.channel, img)
+    await client.send_file(context.message.channel, img)
 
 
 @dobby.command(name="Character finder",
