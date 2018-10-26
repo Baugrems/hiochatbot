@@ -146,16 +146,8 @@ async def on_message(message):
     if message.author == client.user:
     	return
 
-    if message.content.lower().startswith('dobby help list'):
-    	msg = 'Dobby is a good house elf. Dobby likes to be helpful!'.format(message)
-    	await client.send_message(message.channel, msg)
-    	msg = "Dobby can give spell suggestions. Ask 'Dobby give me a spell' and Dobby give you a spell!"
-    	await client.send_message(message.channel, msg)
-    	msg = "Dobby can try to name famous characters? Just ask 'Dobby tell me about someone' and Dobby do it! Sometimes..."
-    	await client.send_message(message.channel, msg)
-
     if message.content.lower().startswith('hi dobby'):
-        msg = 'Hello {0.author.mention}. Ask Dobby for the "Dobby help list" if you want info on Dobby.'.format(message)
+        msg = 'Hello {0.author.mention}. Type ".dobby help" if want help on Dobby!'.format(message)
         await client.send_message(message.channel, msg)
 
     if message.content.lower().startswith('validate me please'):
@@ -201,6 +193,10 @@ async def on_message(message):
     elif 'sock' in message.content.lower():
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
+    elif 'wingardium leviosa' in message.content.lower():
+        await client.send_file(message.channel, "Levisosa.jpg")
+    elif 'pokemon' in message.content.lower():
+        await client.send_file(message.channel, "pokemon.jpeg")
 
 
 
