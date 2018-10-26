@@ -35,13 +35,13 @@ client = Bot(command_prefix=BOT_PREFIX)
 async def dobby(ctx):
     if ctx.invoked_subcommand is None:
     	availablegifs = [
-    		"dobbydie.gif",
-    		"dobbyfree.gif",
-    		"dobbyheadhit.gif",
-    		"dobbyhitself.gif",
-    		"dobbymagic.gif",
-    		"dobbysmug.gif",
-    		"dobbytwitch.gif"
+    		"images/dobbydie.gif",
+    		"images/dobbyfree.gif",
+    		"images/dobbyheadhit.gif",
+    		"images/dobbyhitself.gif",
+    		"images/dobbymagic.gif",
+    		"images/dobbysmug.gif",
+    		"images/dobbytwitch.gif"
     	]
     	await client.send_file(ctx.message.channel, random.choice(availablegifs))
 
@@ -77,9 +77,10 @@ async def bestHouse(context):
 			   pass_context=True)
 async def dobbyhelp(context):
 	msg = '''```Dobby Commands:
-		.dobby spell            - Provides a random Harry Potter Spell
+		.dobby spell            - Provides a random Harry Potter Spell.
 		.dobby sort             - Picks a random house to display.
 		.dobby character "name" - Finds a character by that name from HP.
+        .dobby d20              - Rolls a visual 20 sided die.
 
 		Contact Sebastián Cazarez <@Baugrems1234> for Technical Support.```'''
 	await client.send_message(context.message.channel, msg)
@@ -130,7 +131,7 @@ async def character(context, findName):
 	if not value:
 		msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
 		await client.send_message(context.message.channel, msg)
-		await client.send_file(context.message.channel, "dobbyhitself.gif")
+		await client.send_file(context.message.channel, "images/dobbyhitself.gif")
 	else:
 		value = value[0]
 		msg = value["name"] + " "
@@ -221,14 +222,14 @@ async def on_message(message):
 
 #More Random Stuff
     if 'dobby a sock' in message.content.lower():
-    	await client.send_file(message.channel, "dobbysock.gif")
+    	await client.send_file(message.channel, "images/dobbysock.gif")
     elif 'sock' in message.content.lower():
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
     if 'leviosa' in message.content.lower():
-        await client.send_file(message.channel, "leviosa.jpg")
+        await client.send_file(message.channel, "images/leviosa.jpg")
     if 'pokemon' in message.content.lower():
-        await client.send_file(message.channel, "pokemon.jpeg")
+        await client.send_file(message.channel, "images/pokemon.jpeg")
 
 
 
