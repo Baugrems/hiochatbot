@@ -16,21 +16,6 @@ TOKEN = (os.environ['TOKEN'])
 
 client = Bot(command_prefix=BOT_PREFIX)
 
-# @client.command(name='8ball',
-#                 description="Answers a yes/no question.",
-#                 brief="Answers from the beyond.",
-#                 aliases=['eight_ball', 'eightball', '8-ball'],
-#                 pass_context=True)
-# async def eight_ball(context):
-#     possible_responses = [
-#         'That is a resounding no',
-#         'It is not looking likely',
-#         'Too hard to tell',
-#         'It is quite possible',
-#         'Definitely',
-#     ]
-#     await client.say(random.choice(possible_responses) + ", " + context.message.author.mention)
-
 @client.group(pass_context=True)
 async def dobby(ctx):
     if ctx.invoked_subcommand is None:
@@ -91,29 +76,6 @@ async def dobbyhelp(context):
                aliases=["d20", "D20", "roll20"],
                pass_context=True)
 async def roll20(context):
-    # switcher = {
-    #     1: "images/D20_1.png",
-    #     2: "images/D20_2.png",
-    #     3: "images/D20_3.png",
-    #     4: "images/D20_4.png",
-    #     5: "images/D20_5.png",
-    #     6: "images/D20_6.png",
-    #     7: "images/D20_7.png",
-    #     8: "images/D20_8.png",
-    #     9: "images/D20_9.png",
-    #     10: "images/D20_10.png",
-    #     11: "images/D20_11.png",
-    #     12: "images/D20_12.png",
-    #     13: "images/D20_13.png",
-    #     14: "images/D20_14.png",
-    #     15: "images/D20_15.png",
-    #     16: "images/D20_16.png",
-    #     17: "images/D20_17.png",
-    #     18: "images/D20_18.png",
-    #     19: "images/D20_19.png",
-    #     20: "images/D20_20.png"
-    # }
-    # img = switcher.get(random.randint(1,20), False)
     img = "images/D20_" + str(random.randint(1,20)) + ".png"
     await client.send_file(context.message.channel, img)
 
@@ -126,8 +88,6 @@ async def roll20(context):
 async def character(context, findName):
 	payload = {'name': findName, 'key': '$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'}
 	response = requests.get('https://www.potterapi.com/v1/characters', params=payload)
-	# url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
-	# response = requests.get(url)
 	value = response.json()
 	if not value:
 		msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
@@ -155,7 +115,6 @@ async def character(context, findName):
 		if value.get("bloodStatus", False):
 			msg += ":: Blood-Status - " + value["bloodStatus"]
 		print(response.url)
-	# msg = "" + value["name"] + " is a " + value["role"] + " from " + value["school"] + ". " + value["name"] + " is also a " + value["species"] + " " + value["bloodStatus"]
 		await client.send_message(context.message.channel, msg)
 
 	
