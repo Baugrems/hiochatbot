@@ -117,9 +117,6 @@ async def character(context, findName):
 		print(response.url)
 		await client.send_message(context.message.channel, msg)
 
-	
-
-
 # @dobby.command(name='trivia',
 #                 description="Begins Harry Potter Trivia",
 #                 brief="HP Trivia.",
@@ -138,12 +135,12 @@ async def on_message(message):
     await client.process_commands(message)
     if message.author == client.user:
     	return
-
-    if message.content.lower().startswith('hi dobby'):
+    mcont = message.content.lower()
+    if mcont.startswith('hi dobby'):
         msg = 'Hello {0.author.mention}. Type ".dobby help" if want help on Dobby!'.format(message)
         await client.send_message(message.channel, msg)
 
-    if message.content.lower().startswith('validate me please'):
+    if mcont.startswith('validate me please'):
     	if message.channel == client.get_channel('450870668435914752'):
     		msg = 'Hello @everyone! {0.author.mention} needs to be checked in!'.format(message)
     		await client.send_message(client.get_channel('450870668435914752'), msg)
@@ -151,7 +148,7 @@ async def on_message(message):
         	msg = "You seem to be validated already, {0.author.mention}!".format(message)
         	await client.send_message(message.channel, msg)
 
-    if message.content.lower().startswith('.clear'):
+    if mcont.startswith('.clear'):
     #Clears channel history, but only if professor does command inside the arrival room
     	if message.channel.id == '450870668435914752':
     		tmp = await client.send_message(message.channel, 'Clearing messages...')
@@ -159,14 +156,14 @@ async def on_message(message):
     			await client.delete_message(msg)
 
 #PotterAPI KEY $2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq/
-    if message.content.lower().startswith('dobby give me a spell'):
+    if mcont.startswith('dobby give me a spell'):
     	url = "https://www.potterapi.com/v1/spells?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq"
     	response = requests.get(url)
     	value = random.choice(response.json())
     	msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     	await client.send_message(message.channel, msg)
 
-    if message.content.lower().startswith('dobby what house is best?'):
+    if mcont.startswith('dobby what house is best?'):
     	url = "https://www.potterapi.com/v1/sortinghat"
     	response = requests.get(url)
     	value = response.json()
@@ -181,15 +178,17 @@ async def on_message(message):
     # 	await client.send_message(message.channel, msg)
 
 #More Random Stuff
-    if 'dobby a sock' in message.content.lower():
+    if 'dobby a sock' in mcont:
     	await client.send_file(message.channel, "images/dobbysock.gif")
-    elif 'sock' in message.content.lower():
+    elif 'sock' in mcont:
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
-    if 'leviosa' in message.content.lower():
+    if 'leviosa' in mcont:
         await client.send_file(message.channel, "images/leviosa.jpg")
-    if 'pokemon' in message.content.lower():
+    if 'pokemon' in mcont:
         await client.send_file(message.channel, "images/pokemon.jpeg")
+    if 'kaelena' in mcont:
+        await client.send_file(message.channel, "images/cruiseship.gif")
 
 
 
