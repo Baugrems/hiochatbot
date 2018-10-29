@@ -9,7 +9,7 @@ from discord import Role
 from discord import Server
 import discord
 import boto
-import tatsumaki.py
+from tatsumaki.wrapper import ApiWrapper
 
 BOT_PREFIX = "."
 
