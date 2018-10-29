@@ -37,7 +37,7 @@ async def checkTatRank(context):
     wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
     response = await wrapper.leaderboard(context.message.server.id, 5)
     for user in response:
-        msg = "Rank " + user["rank"] + ": "client.server.get_member(user["user_id"]) + " with " + user["points"] + " points."
+        msg = "Rank " + user["rank"] + ": " + client.server.get_member(user["user_id"]) + " with " + user["points"] + " points."
         await client.send_message(context.message.channel, msg)
 
 
