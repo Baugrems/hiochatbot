@@ -10,6 +10,13 @@ from discord import Server
 import discord
 import boto
 from tatsumaki.wrapper import ApiWrapper
+from cogs.utils.settings import Settings
+from cogs.utils.dataIO import dataIO
+from cogs.utils.chat_formatting import inline
+from collections import Counter
+from io import TextIOWrapper
+
+
 
 BOT_PREFIX = "."
 
@@ -234,6 +241,88 @@ async def on_member_join(member):
 
 # 450870668435914752 Arrival channel ID
 
+
+def set_cog(cog, value):  # TODO: move this out of red.py
+    data = dataIO.load_json("data/red/cogs.json")
+    data[cog] = value
+    dataIO.save_json("data/red/cogs.json", data)
+
+
+def load_cogs(bot):
+    defaults = ("alias", "audio", "customcom", "downloader", "economy",
+                "general", "image", "mod", "streams", "trivia")
+
+    try:
+        registry = dataIO.load_json("data/red/cogs.json")
+    except:
+        registry = {}
+
+    bot.load_extension('cogs.owner')
+    owner_cog = bot.get_cog('Owner')
+    if owner_cog is None:
+        print("The owner cog is missing. It contains core functions without "
+              "which Red cannot function. Reinstall.")
+        exit(1)
+
+    if bot.settings._no_cogs:
+        bot.logger.debug("Skipping initial cogs loading (--no-cogs)")
+        if not os.path.isfile("data/red/cogs.json"):
+            dataIO.save_json("data/red/cogs.json", {})
+        return
+
+    failed = []
+    extensions = owner_cog._list_cogs()
+
+    if not registry:  # All default cogs enabled by default
+        for ext in defaults:
+            registry["cogs." + ext] = True
+
+    for extension in extensions:
+        if extension.lower() == "cogs.owner":
+            continue
+        to_load = registry.get(extension, False)
+        if to_load:
+            try:
+                owner_cog._load_cog(extension)
+            except Exception as e:
+                print("{}: {}".format(e.__class__.__name__, str(e)))
+                bot.logger.exception(e)
+                failed.append(extension)
+                registry[extension] = False
+
+    dataIO.save_json("data/red/cogs.json", registry)
+
+    if failed:
+        print("\nFailed to load: {}\n".format(" ".join(failed)))
+
+def check_folders():
+    folders = ("data", "data/red", "cogs", "cogs/utils")
+    for folder in folders:
+        if not os.path.exists(folder):
+            print("Creating " + folder + " folder...")
+            os.makedirs(folder)
+
+def main(bot):
+    check_folders()
+    if not bot.settings.no_prompt:
+        interactive_setup(bot.settings)
+    load_cogs(bot)
+
+    if bot.settings._dry_run:
+        print("Quitting: dry run")
+        bot._shutdown_mode = True
+        exit(0)
+
+    print("Logging into Discord...")
+    bot.uptime = datetime.datetime.utcnow()
+
+    if bot.settings.login_credentials:
+        yield from bot.login(*bot.settings.login_credentials,
+                             bot=not bot.settings.self_bot)
+    else:
+        print("No credentials available to login.")
+        raise RuntimeError()
+    yield from bot.connect()
 
 @client.event
 async def on_ready():
