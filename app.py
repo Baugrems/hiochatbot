@@ -35,10 +35,14 @@ async def checkTatRank(context):
                 pass_context=True)
 async def checkTatRank(context):
     wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
-    response = await wrapper.leaderboard(context.message.server.id, 5)
+    response = await wrapper.leaderboard(context.message.server.id, 20)
     for user in response:
-        msg = "Rank " + str(user["rank"]) + ": " + str(user["user_id"]) + " with " + user["score"] + " points."
-        await client.send_message(context.message.channel, msg)
+        if context.message.server.get_member(user["user_id"]):
+            msg = "Rank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
+            await client.send_message(context.message.channel, msg)
+        else:
+            msg = "Rank " + str(user["rank"]) + ": Unknown User with " + user["score"] + " points."
+            await client.send_message(context.message.channel, msg)
 
 
 
