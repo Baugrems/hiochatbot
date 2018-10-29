@@ -17,17 +17,6 @@ TOKEN = (os.environ['TOKEN'])
 
 client = Bot(command_prefix=BOT_PREFIX)
 
-@client.command(name="TatRank",
-                description="Grab users tatsumaki rank when used.",
-                brief="Tatsumanki Rank",
-                aliases=["trank", "tatrank"],
-                pass_context=True)
-async def checkTatRank(context):
-    wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
-    response = await wrapper.get_user_stats(context.message.server.id, context.message.author.id)
-    msg = "Your ID is " + response["user_id"] + " and you have " + response["points"] + " points."
-    await client.send_message(context.message.channel, msg)
-
 @client.command(name="TatLeaders",
                 description="Grab tatsumaki rank leaders when used.",
                 brief="Tatsumanki Rank Leaderboard",
@@ -36,6 +25,14 @@ async def checkTatRank(context):
 async def checkTatRank(context):
     wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
     response = await wrapper.leaderboard(context.message.server.id, 10)
+    for user in response:
+        if context.message.server.get_member(user["user_id"]):
+            msg = "Rank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
+            await client.send_message(context.message.channel, msg)
+        else:
+            msg = "Rank " + str(user["rank"]) + ": Unknown User with " + user["score"] + " points."
+            await client.send_message(context.message.channel, msg)
+    response = await wrapper.leaderboard(context.message.server.id, 20)
     for user in response:
         if context.message.server.get_member(user["user_id"]):
             msg = "Rank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
@@ -183,7 +180,7 @@ async def on_message(message):
         	await client.send_message(message.channel, msg)
 
     if mcont.startswith('.clear'):
-    #Clears channel history, but only if professor does command inside the arrival room
+    #Clears channel history, but only if someone does it inside the arrival room
     	if message.channel.id == '450870668435914752':
     		tmp = await client.send_message(message.channel, 'Clearing messages...')
     		async for msg in client.logs_from(message.channel):
