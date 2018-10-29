@@ -3,6 +3,7 @@ asn1crypto==0.24.0
 async-timeout==3.0.1
 asyncio==3.4.3
 boto==2.49.0
+Cogs==0.4.3
 discord.py==0.16.12
 requests==2.19.1
 requests-unixsocket==0.1.5
