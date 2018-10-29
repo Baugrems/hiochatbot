@@ -24,7 +24,10 @@ client = Bot(command_prefix=BOT_PREFIX)
                 pass_context=True)
 async def checkTatRank(context):
     wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
-    await wrapper.get_user_stats(context.message.server.id, context.message.author.id)
+    response = await wrapper.get_user_stats(context.message.server.id, context.message.author.id)
+    msg = "Your ID is " + response["user_id"] + " and you have " + response["points"] + " points."
+    await client.send_message(context.message.channel, msg)
+
 
 @client.group(pass_context=True)
 async def dobby(ctx):
