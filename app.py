@@ -9,12 +9,22 @@ from discord import Role
 from discord import Server
 import discord
 import boto
+import tatsumaki
 
 BOT_PREFIX = "."
 
 TOKEN = (os.environ['TOKEN'])
 
 client = Bot(command_prefix=BOT_PREFIX)
+
+@client.command(name="TatRank",
+                description="Grab users tatsumaki rank when used.",
+                brief="Tatsumanki Rank",
+                aliases=["trank", "tatrank"],
+                pass_context=True)
+async def checkTatRank(context):
+    wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
+    await wrapper.get_user_stats(context.server.id, context.message.author.id)
 
 @client.group(pass_context=True)
 async def dobby(ctx):
