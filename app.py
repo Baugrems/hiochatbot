@@ -201,6 +201,9 @@ async def on_message(message):
     	msg = "" + value + " is best Dobby thinks."
     	await client.send_message(message.channel, msg)
 
+    if mcont.startswith('dobby hug'):
+        await client.send_file(message.channel, "images/pepehug.png")
+
     # if message.content.lower().startswith('dobby tell me about someone'):
     # 	url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
     # 	response = requests.get(url)
