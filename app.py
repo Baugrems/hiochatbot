@@ -25,6 +25,7 @@ client = Bot(command_prefix=BOT_PREFIX)
 async def checkTatRank(context):
     msg = "Give Dobby a moment to grab list..."
     await client.send_message(context.message.channel, msg)
+    await client.send_typing(context.message.channel)
     wrapper = ApiWrapper("b9ff5b5da7b223a3251cd98a68329b18-10d056d2a47b9-75b8b43ff968bb3cea8fdfb4821815d9")
     response = await wrapper.leaderboard(context.message.server.id, 10)
     msg = "```"
