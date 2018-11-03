@@ -10,6 +10,7 @@ from discord import Server
 import discord
 import boto
 from tatsumaki.wrapper import ApiWrapper
+import time
 
 BOT_PREFIX = "."
 
@@ -34,6 +35,7 @@ async def checkTatRank(context):
             msg += "\nRank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
         else:
             msg += "\nRank " + str(user["rank"]) + ": Unknown User with " + user["score"] + " points."
+    time.sleep(2)
     response = await wrapper.leaderboard(context.message.server.id, 20)
     for user in response:
         if context.message.server.get_member(user["user_id"]):
