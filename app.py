@@ -31,15 +31,12 @@ async def checkTatRank(context):
     for user in response:
         if context.message.server.get_member(user["user_id"]):
             msg += "\nRank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
-            await client.send_message(context.message.channel, msg)
         else:
             msg += "\nRank " + str(user["rank"]) + ": Unknown User with " + user["score"] + " points."
-            await client.send_message(context.message.channel, msg)
     response = await wrapper.leaderboard(context.message.server.id, 20)
     for user in response:
         if context.message.server.get_member(user["user_id"]):
             msg += "\nRank " + str(user["rank"]) + ": " + context.message.server.get_member(user["user_id"]).nick + " with " + user["score"] + " points."
-            await client.send_message(context.message.channel, msg)
         else:
             msg += "\nRank " + str(user["rank"]) + ": Unknown User with " + user["score"] + " points."
     msg += "```"
