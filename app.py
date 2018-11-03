@@ -99,6 +99,9 @@ async def dobbyhelp(context):
 		.dobby character "name" - Finds a character by that name from HP.
         .dobby d20              - Rolls a visual 20 sided die.
 
+Other Commands:
+        .tleaders               - Shows named list of Tatsumaki High Score.
+
 		Contact Sebastián Cazarez <@Baugrems1234> for Technical Support.```'''
 	await client.send_message(context.message.channel, msg)
 
