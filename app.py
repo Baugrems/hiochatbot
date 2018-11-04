@@ -87,6 +87,21 @@ async def bestHouse(context):
     msg = "" + value + " is best Dobby thinks."
     await client.send_message(context.message.channel, msg)
 
+@dobby.command(name="Dobby Timer",
+               description="Set a timer with Dobby",
+               brief="Set a timer",
+               aliases=["timer"],
+               pass_context=True)
+async def dobbyTimer(context, time):
+    t = Timer(time, dobbyTimeout(context))
+    t.start()
+    msg = "Dobby will alert you in {0} seconds when time up.".format(time)
+    await client.send_message(context.message.channel, msg)
+
+async def dobbyTimeout(context):
+    msg = "{0.message.author.mention} time up!".format(context)
+    await client.send_message(context.message.channel, msg)
+
 @dobby.command(name="Dobby Help",
 			   description="Gives a list of available commands.",
 			   brief="Dobby Help.",
