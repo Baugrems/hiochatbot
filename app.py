@@ -95,7 +95,7 @@ async def bestHouse(context):
                aliases=["timer"],
                pass_context=True)
 async def dobbyTimer(context, time):
-    t = Timer(time, dobbyTimeout(context))
+    t = Timer(int(time), dobbyTimeout(context))
     t.start()
     msg = "Dobby will alert you in {0} seconds when time up.".format(time)
     await client.send_message(context.message.channel, msg)
