@@ -11,9 +11,8 @@ import discord
 import boto
 from tatsumaki.wrapper import ApiWrapper
 import time
-import thread
 import threading
-
+from Thread import Timer
 
 BOT_PREFIX = "."
 
