@@ -111,7 +111,7 @@ async def dobbyhelp(context):
 		.dobby sort             - Picks a random house to display.
 		.dobby character "name" - Finds a character by that name from HP.
         .dobby d20              - Rolls a visual 20 sided die.
-        .dobby timer x          - Sets a timer for x seconds
+        .dobby timer x "text"   - Sets a timer for x seconds, text can be @mention
 
 Other Commands:
         .tleaders               - Shows named list of Tatsumaki High Score.
