@@ -96,7 +96,7 @@ async def bestHouse(context):
 async def dobbyTimer(context, time):
     msg = "Dobby will alert you in {0} second(s) when time up.".format(time)
     await client.send_message(context.message.channel, msg)
-    await asyncio.sleep(time)
+    await asyncio.sleep(float(time))
     msg = "{0.message.author.mention} time up!".format(context)
     await client.send_message(context.message.channel, msg)
 
