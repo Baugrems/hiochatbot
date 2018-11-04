@@ -11,7 +11,6 @@ import discord
 import boto
 from tatsumaki.wrapper import ApiWrapper
 import time
-from threading import Timer
 
 
 BOT_PREFIX = "."
@@ -95,13 +94,9 @@ async def bestHouse(context):
                aliases=["timer"],
                pass_context=True)
 async def dobbyTimer(context, time):
-    t = Timer(int(time), dobbyTimeout(context))
-    t.start()
     msg = "Dobby will alert you in {0} second(s) when time up.".format(time)
     await client.send_message(context.message.channel, msg)
-
-
-async def dobbyTimeout(context):
+    await asyncio.sleep(time)
     msg = "{0.message.author.mention} time up!".format(context)
     await client.send_message(context.message.channel, msg)
 
