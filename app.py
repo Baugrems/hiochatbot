@@ -93,11 +93,11 @@ async def bestHouse(context):
                brief="Set a timer",
                aliases=["timer"],
                pass_context=True)
-async def dobbyTimer(context, time):
+async def dobbyTimer(context, time, text):
     msg = "Dobby will alert you in {0} second(s) when time up.".format(time)
     await client.send_message(context.message.channel, msg)
     await asyncio.sleep(float(time))
-    msg = "{0.message.author.mention} time up!".format(context)
+    msg = "{0.message.author.mention} time up for {1}".format(context, text)
     await client.send_message(context.message.channel, msg)
 
 @dobby.command(name="Dobby Help",
@@ -111,6 +111,7 @@ async def dobbyhelp(context):
 		.dobby sort             - Picks a random house to display.
 		.dobby character "name" - Finds a character by that name from HP.
         .dobby d20              - Rolls a visual 20 sided die.
+        .dobby timer x          - Sets a timer for x seconds
 
 Other Commands:
         .tleaders               - Shows named list of Tatsumaki High Score.
