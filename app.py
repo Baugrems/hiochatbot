@@ -100,6 +100,7 @@ async def dobbyTimer(context, time):
     msg = "Dobby will alert you in {0} seconds when time up.".format(time)
     await client.send_message(context.message.channel, msg)
 
+@client.command()
 async def dobbyTimeout(context):
     msg = "{0.message.author.mention} time up!".format(context)
     await client.send_message(context.message.channel, msg)
