@@ -111,7 +111,7 @@ async def dobbyhelp(context):
 		.dobby sort             - Picks a random house to display.
 		.dobby character "name" - Finds a character by that name from HP.
         .dobby d20              - Rolls a visual 20 sided die.
-        .dobby timer x "text"   - Sets a timer for x seconds, text can be @mention
+        .dobby timer x mention  - Sets a timer for x seconds and @mentions.
 
 Other Commands:
         .tleaders               - Shows named list of Tatsumaki High Score.
@@ -134,10 +134,15 @@ async def roll20(context):
 			   brief="Finds characters",
 			   aliases=["character", "find", "search"],
 			   pass_context=True)
-async def character(context, findName):
-	payload = {'name': findName, 'key': '$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'}
-	response = requests.get('https://www.potterapi.com/v1/characters', params=payload)
-	value = response.json()
+async def character(context, findName = None):
+    if findName is None:
+        url = 'https://www.potterapi.com/v1/characters?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'
+        response = requests.get(url)
+        value = random.choice(response.json())
+    else:
+        payload = {'name': findName, 'key': '$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq'}
+        response = requests.get('https://www.potterapi.com/v1/characters', params=payload)
+        value = response.json()
 	if not value:
 		msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
 		await client.send_message(context.message.channel, msg)
