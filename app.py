@@ -158,18 +158,18 @@ async def character(context, findName = None):
             msg = msg + ":: " + value["house"] + " house "
         if value.get("deathEater", False):
             msg = msg + ":: Death Eater "
-		if value.get("dumbledoresArmy", False):
-			msg = msg + ":: Member of Dumbledores Army "
-		if value.get("orderOfThePhoenix", False):
-			msg = msg + ":: Member of the Order of the Phoenix "
-		if value.get("ministryOfMagic", False):
-			msg = msg + ":: Member of the Ministry of Magic "
-		if value.get("species", False):
-			msg += "::Species - " + value["species"] + " "
-		if value.get("bloodStatus", False):
-			msg += ":: Blood-Status - " + value["bloodStatus"]
-		print(response.url)
-		await client.send_message(context.message.channel, msg)
+        if value.get("dumbledoresArmy", False):
+            msg = msg + ":: Member of Dumbledores Army "
+        if value.get("orderOfThePhoenix", False):
+            msg = msg + ":: Member of the Order of the Phoenix "
+        if value.get("ministryOfMagic", False):
+            msg = msg + ":: Member of the Ministry of Magic "
+        if value.get("species", False):
+            msg += "::Species - " + value["species"] + " "
+        if value.get("bloodStatus", False):
+            msg += ":: Blood-Status - " + value["bloodStatus"]
+        print(response.url)
+        await client.send_message(context.message.channel, msg)
 
 # @dobby.command(name='trivia',
 #                 description="Begins Harry Potter Trivia",
