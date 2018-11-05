@@ -148,16 +148,16 @@ async def character(context, findName = None):
         await client.send_message(context.message.channel, msg)
         await client.send_file(context.message.channel, "images/dobbyhitself.gif")
     else:
-		value = value[0]
-		msg = value["name"] + " "
-		if value.get('role', False):
-			msg += ":: " + value["role"] + " "
-		if value.get("school", False):
-			msg = msg + ":: " + value["school"] + " "
-		if value.get('house', False):
-			msg = msg + ":: " + value["house"] + " house "
-		if value.get("deathEater", False):
-			msg = msg + ":: Death Eater "
+        value = value[0]
+        msg = value["name"] + " "
+        if value.get('role', False):
+            msg += ":: " + value["role"] + " "
+        if value.get("school", False):
+            msg = msg + ":: " + value["school"] + " "
+        if value.get('house', False):
+            msg = msg + ":: " + value["house"] + " house "
+        if value.get("deathEater", False):
+            msg = msg + ":: Death Eater "
 		if value.get("dumbledoresArmy", False):
 			msg = msg + ":: Member of Dumbledores Army "
 		if value.get("orderOfThePhoenix", False):
