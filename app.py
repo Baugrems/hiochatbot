@@ -144,10 +144,10 @@ async def character(context, findName = None):
         response = requests.get('https://www.potterapi.com/v1/characters', params=payload)
         value = response.json()
     if not value:
-		msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
-		await client.send_message(context.message.channel, msg)
-		await client.send_file(context.message.channel, "images/dobbyhitself.gif")
-	else:
+        msg = "Dobby cannot find that character... Dobby deserves punishment!!!"
+        await client.send_message(context.message.channel, msg)
+        await client.send_file(context.message.channel, "images/dobbyhitself.gif")
+    else:
 		value = value[0]
 		msg = value["name"] + " "
 		if value.get('role', False):
