@@ -78,7 +78,7 @@ async def spell(context):
 @dobby.command(name="Cat Facts",
                description="Provides a random cat fact.",
                brief="Cat Facts",
-               aliases=['cf', 'catfact', 'catfacts'],
+               aliases=["cf", "catfact", "catfacts"],
                pass_context=True)
 async def catfacts(context):
     url = "https://cat-fact.herokuapp.com/facts"
