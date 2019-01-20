@@ -87,6 +87,18 @@ async def catfacts(context):
     msg = value["text"]
     await client.send_message(context.message.channel, msg)
 
+@dobby..command(name="Dog Photo",
+                description="Random Doggo",
+                brief="random dooooogggooo",
+                aliases=["dog", "dp","doggo","pupper"],
+                pass_context=True)
+async def dogphoto(context):
+    url = "https://dog.ceo/api/breeds/image/random"
+    response = requests.get(url)
+    value = response()
+    msg = value["text"]
+    await client.send_message(context.message.channel, msg)
+
 @dobby.command(name='sorting',
                 description="Picks a random house to display.",
                 brief="Choose a random house.",
