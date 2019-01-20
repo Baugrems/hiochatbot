@@ -118,9 +118,7 @@ async def bestHouse(context):
                 pass_context=True)
 async def streetview(context, location = "Hogwarts"):
     url = "https://maps.googleapis.com/maps/api/streetview?location=%22" + location + "%22&size=600x400&key=AIzaSyCg3vK8-4LKTy0iP-IHg_nyyl9GLwLFHS4"
-    response = requests.get(url)
-    value = response.json()
-    await client.send_message(context.message.channel, msg)
+    await client.send_message(context.message.channel, url)
 
 # "https://maps.googleapis.com/maps/api/streetview?location=%22Denver%22&size=600x400&key=AIzaSyCg3vK8-4LKTy0iP-IHg_nyyl9GLwLFHS4"
 
