@@ -252,7 +252,6 @@ async def on_message(message):
     if 'Aoi' in mcont:
         msg = "Aoi smells."
     	await client.send_message(message.channel, msg)
-        )
 
 
 
