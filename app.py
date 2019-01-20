@@ -90,7 +90,7 @@ async def catfacts(context):
 @dobby.command(name="Dog Photo",
                 description="Random Doggo",
                 brief="random dooooogggooo",
-                aliases=["dog", "dp","doggo","pupper"],
+                aliases=["dog","dp","doggo","pupper"],
                 pass_context=True)
 async def dogphoto(context):
     url = "https://dog.ceo/api/breeds/image/random"
