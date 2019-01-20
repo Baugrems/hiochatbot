@@ -250,7 +250,7 @@ async def on_message(message):
     if 'kaelena' in mcont:
         await client.send_file(message.channel, "images/cruiseship.gif")
     if 'Aoi' in mcont:
-        msg = "Aoi smells."
+        msg = "Aoi Risa smells."
         await client.send_message(message.channel, msg)
 
 
