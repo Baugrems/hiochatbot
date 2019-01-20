@@ -97,6 +97,7 @@ async def dogphoto(context):
     response = requests.get(url)
     value = response()
     msg = value["message"]
+    print(msg)
     await client.send_message(context.message.channel, msg)
 
 @dobby.command(name='sorting',
