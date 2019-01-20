@@ -87,7 +87,7 @@ async def catfacts(context):
     msg = value["text"]
     await client.send_message(context.message.channel, msg)
 
-@dobby..command(name="Dog Photo",
+@dobby.command(name="Dog Photo",
                 description="Random Doggo",
                 brief="random dooooogggooo",
                 aliases=["dog", "dp","doggo","pupper"],
