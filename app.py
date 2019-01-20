@@ -81,10 +81,10 @@ async def spell(context):
                aliases=["cf", "catfact", "catfacts"],
                pass_context=True)
 async def catfacts(context):
-    url = "https://cat-fact.herokuapp.com/facts"
+    url = "https://cat-fact.herokuapp.com/facts/random?animal=cat&amount=1"
     response = requests.get(url)
     value = response.json()
-    msg = random.choice(value)
+    msg = value
     await client.send_message(context.message.channel, msg)
 
 @dobby.command(name='sorting',
