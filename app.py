@@ -96,7 +96,7 @@ async def dogphoto(context):
     url = "https://dog.ceo/api/breeds/image/random"
     response = requests.get(url)
     value = response()
-    msg = value["text"]
+    msg = value["message"]
     await client.send_message(context.message.channel, msg)
 
 @dobby.command(name='sorting',
