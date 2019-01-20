@@ -95,7 +95,7 @@ async def catfacts(context):
 async def dogphoto(context):
     url = "https://dog.ceo/api/breeds/image/random"
     response = requests.get(url)
-    value = response()
+    value = response.json()
     msg = value["message"]
     print(msg)
     await client.send_message(context.message.channel, msg)
