@@ -75,6 +75,17 @@ async def spell(context):
     msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     await client.send_message(context.message.channel, msg)
 
+@dobby.command(name="Cat Facts",
+               description="Provides a random cat fact.",
+               brief="Cat Facts",
+               aliases=['cf', 'catfact', 'catfacts'],
+               pass_context=True)
+async def catfacts(context):
+    url = "https://cat-fact.herokuapp.com/facts"
+    response = requests.get(url)
+    value = random.choice)response.json())
+    msg = value["text"]
+    await client.send_message(context.message.channel, msg)
 
 @dobby.command(name='sorting',
                 description="Picks a random house to display.",
