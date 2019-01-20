@@ -260,6 +260,8 @@ async def on_message(message):
         await client.send_file(message.channel, "images/pokemon.jpeg")
     if 'kaelena' in mcont:
         await client.send_file(message.channel, "images/cruiseship.gif")
+    if 'milex' in mcont:
+        await client.send_file(message.channel, "images/cruiseship.gif")
 
 
 
