@@ -84,7 +84,7 @@ async def catfacts(context):
     url = "https://cat-fact.herokuapp.com/facts"
     response = requests.get(url)
     value = random.choice(response.json())
-    msg = value["text"]
+    msg = "" + value["text"]
     await client.send_message(context.message.channel, msg)
 
 @dobby.command(name='sorting',
