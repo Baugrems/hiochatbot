@@ -83,7 +83,7 @@ async def spell(context):
 async def sing(context):
    # https://www.youtube.com/watch?v=Htaj3o3JD8I - HP THEME
    # https://www.youtube.com/watch?v=xCqfwXeq6_8 - Dobby Punish
-   author = ctx.message.author
+   author = context.message.author
    voice_channel = author.voice_channel
    voice = await client.join_voice_channel(voice_channel)
    player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
