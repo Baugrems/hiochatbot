@@ -27,15 +27,9 @@ PyDispatcher==2.0.5
 PyNaCl==1.3.0
 pyOpenSSL==18.0.0
 pyserial==3.4
-python-apt==1.6.2
-python-debian==0.1.32
 pytz==2018.5
 pyxdg==0.25
 PyYAML==3.13
-SecretStorage==2.3.1
-service-identity==17.0.0
 six==1.12.0
-ssh-import-id==5.7
-systemd-python==234
 tatsumaki.py==0.1
 youtube-dl==2019.1.24
