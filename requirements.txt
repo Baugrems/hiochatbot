@@ -8,3 +8,4 @@ discord.py==0.16.12
 requests==2.19.1
 requests-unixsocket==0.1.5
 tatsumaki.py==0.1
+youtube-dl==2019.01.24
