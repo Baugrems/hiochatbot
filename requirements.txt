@@ -10,7 +10,6 @@ certifi==2018.8.24
 cffi==1.11.5
 chardet==3.0.4
 Click==7.0
-cloud-init==18.2
 Cogs==0.4.3
 colorama==0.3.7
 command-not-found==0.3
