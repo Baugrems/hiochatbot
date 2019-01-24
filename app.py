@@ -83,7 +83,7 @@ async def spell(context):
 async def sing(context):
    # https://www.youtube.com/watch?v=Htaj3o3JD8I - HP THEME
    # https://www.youtube.com/watch?v=xCqfwXeq6_8 - Dobby Punish
-   voice = await client.join_voice_channel(get_channel('431611364151263243'))
+   voice = await client.join_voice_channel(Server.get_channel('431611364151263243'))
    player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
    player.start()
 
