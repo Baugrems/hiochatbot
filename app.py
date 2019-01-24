@@ -12,7 +12,7 @@ import boto
 from tatsumaki.wrapper import ApiWrapper
 import time
 from discord import VoiceClient
-import youtube-dl
+import youtube_dl
 
 BOT_PREFIX = "."
 
