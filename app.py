@@ -13,7 +13,7 @@ from tatsumaki.wrapper import ApiWrapper
 import time
 from discord import VoiceClient
 import youtube_dl
-import pynacl
+import PyNaCl
 
 BOT_PREFIX = "."
 
@@ -90,6 +90,14 @@ async def sing(context):
    voice = await client.join_voice_channel(voice_channel)
    player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
    player.start()
+
+@dobby.command(name="disconnect",
+                description="Removes dobby from voice",
+                brief="Kicks Dobby VC",
+                aliases=["shush"],
+                pass_context=True)
+async def disconnect(context):
+    await client.disconnect()
 
 @dobby.command(name="Cat Facts",
                description="Provides a random cat fact.",
