@@ -13,6 +13,7 @@ from tatsumaki.wrapper import ApiWrapper
 import time
 from discord import VoiceClient
 import youtube_dl
+import pynacl
 
 BOT_PREFIX = "."
 
