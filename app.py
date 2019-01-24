@@ -11,7 +11,7 @@ import discord
 import boto
 from tatsumaki.wrapper import ApiWrapper
 import time
-
+from discord import VoiceClient
 
 BOT_PREFIX = "."
 
@@ -74,6 +74,18 @@ async def spell(context):
     value = random.choice(response.json())
     msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     await client.send_message(context.message.channel, msg)
+
+@dobby.command(name="sing",
+                description="Makes Dobby Sing",
+                brief="Voicechat Dobby",
+                aliases=["themesong"],
+                pass_context=True)
+async def sing(context):
+   # https://www.youtube.com/watch?v=Htaj3o3JD8I - HP THEME
+   # https://www.youtube.com/watch?v=xCqfwXeq6_8 - Dobby Punish
+   voice = await client.join_voice_channel('431611364151263243')
+   player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
+   player.start()
 
 @dobby.command(name="Cat Facts",
                description="Provides a random cat fact.",
