@@ -96,7 +96,9 @@ async def sing(context):
                 aliases=["shush"],
                 pass_context=True)
 async def disconnect(context):
-    await voice.disconnect()
+    for x in client.voice_clients:
+        if(x.server == ctx.message.server):
+            return await x.disconnect()
 
 @dobby.command(name="Cat Facts",
                description="Provides a random cat fact.",
