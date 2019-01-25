@@ -76,29 +76,37 @@ async def spell(context):
     msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
     await client.send_message(context.message.channel, msg)
 
-@dobby.command(name="sing",
-                description="Makes Dobby Sing",
-                brief="Voicechat Dobby",
-                aliases=["themesong"],
-                pass_context=True)
-async def sing(context):
-   # https://www.youtube.com/watch?v=Htaj3o3JD8I - HP THEME
-   # https://www.youtube.com/watch?v=xCqfwXeq6_8 - Dobby Punish
-   author = context.message.author
-   voice_channel = author.voice_channel
-   voice = await client.join_voice_channel(voice_channel)
-   player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
-   player.start()
 
-@dobby.command(name="disconnect",
-                description="Removes dobby from voice",
-                brief="Kicks Dobby VC",
-                aliases=["shush"],
-                pass_context=True)
-async def disconnect(context):
-    for x in client.voice_clients:
-        if(x.server == context.message.server):
-            return await x.disconnect()
+
+# VOICE COMMANDS - COMMENTED OUT AS HEROKU DOES NOT SUPPORT DISCORD VOICE AT THE MOMENT
+
+# @dobby.command(name="sing",
+#                 description="Makes Dobby Sing",
+#                 brief="Voicechat Dobby",
+#                 aliases=["themesong"],
+#                 pass_context=True)
+# async def sing(context):
+#    # https://www.youtube.com/watch?v=Htaj3o3JD8I - HP THEME
+#    # https://www.youtube.com/watch?v=xCqfwXeq6_8 - Dobby Punish
+#    author = context.message.author
+#    voice_channel = author.voice_channel
+#    voice = await client.join_voice_channel(voice_channel)
+#    player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Htaj3o3JD8I')
+#    player.start()
+
+# @dobby.command(name="disconnect",
+#                 description="Removes dobby from voice",
+#                 brief="Kicks Dobby VC",
+#                 aliases=["shush"],
+#                 pass_context=True)
+# async def disconnect(context):
+#     for x in client.voice_clients:
+#         if(x.server == context.message.server):
+#             return await x.disconnect()
+
+#END OF VOICE COMMANDS
+
+
 
 @dobby.command(name="Cat Facts",
                description="Provides a random cat fact.",
