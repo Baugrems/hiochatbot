@@ -310,17 +310,6 @@ async def on_message(message):
     elif 'sock' in mcont:
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
-    if 'leviosa' in mcont:
-        await client.send_file(message.channel, "images/leviosa.jpg")
-    if 'pokemon' in mcont:
-        await client.send_file(message.channel, "images/pokemon.jpeg")
-    if 'kaelena' in mcont:
-        await client.send_file(message.channel, "images/cruiseship.gif")
-    if 'milex' in mcont:
-        await client.send_file(message.channel, "images/cruiseship.gif")
-    if 'serena' in mcont:
-        msg = "My Wife says Hi."
-        await client.send_message(message.channel, msg)
 
 
 
