@@ -284,7 +284,7 @@ async def on_message(message):
     	url = "https://www.potterapi.com/v1/spells?key=$2a$10$g9SDctxKs5Gs81icb7fFTu9W2Yxb9va6Q1Ir9KQITekxFwm5vRHPq"
     	response = requests.get(url)
     	value = random.choice(response.json())
-    	msg = "A good " + value["type"].lower() + " might be " + value["spell"] + ". It " + value["effect"] + "."
+    	msg = "A good " + value["type"].lower() + " might be " + "**" + value["spell"] + "**" + ". It " + value["effect"] + "."
     	await client.send_message(message.channel, msg)
 
     if mcont.startswith('dobby what house is best?'):
