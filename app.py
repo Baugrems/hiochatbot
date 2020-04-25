@@ -311,7 +311,7 @@ async def on_message(message):
     	msg = "Did someone say Sock?"
     	await client.send_message(message.channel, msg)
     if 'dobby i love you' in mcont:
-        msg = "{0.author.mention}, I love you too!"
+        msg = "{0.author.mention}, I love you too!".format(message)
         await client.send_message(message.channel, msg)
 
 
